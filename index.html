@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love</title>
+    <title>For My Universe</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
@@ -11,65 +11,67 @@
 </head>
 <body>
 
+    <div id="starfield"></div>
     <div id="ambient-hearts"></div>
 
     <audio id="bg-music" src="assets/bg-music.mp3" loop></audio>
+    <audio id="voice-message" src="assets/message.mp3"></audio>
 
     <div id="music-indicator" class="hidden">
-        <span class="music-bars"><span></span><span></span><span></span></span>
-        <span class="indicator-text">Playing our song...</span>
+        <div class="music-bars"><span></span><span></span><span></span></div>
+        <span class="indicator-text">Our Song</span>
     </div>
 
     <div id="intro-overlay">
         <div class="intro-content">
             <div id="heart-trigger"></div>
-            <p class="tap-text">Tap the heart to enter a little universe</p>
+            <p class="tap-text">Tap the heart to enter my love's universe</p>
         </div>
     </div>
 
     <div id="main-slider">
 
-        <section class="slide active" data-index="0">
-            <div class="glass-card text-center">
+        <section class="slide active">
+            <div class="glass-card text-center animate-fade">
                 <p class="sub-headline">This universe is dedicated to</p>
                 <h1 class="main-title">my love</h1>
                 <h2 class="birthday-text">Happy Birthday! 🎂</h2>
             </div>
         </section>
 
-        <section class="slide" data-index="1">
+        <section class="slide">
             <div class="journal-container">
                 <div class="journal-page photo-card top-left">
                     <div class="tape"></div>
                     <div class="photo-frame">
-                        <img src="assets/photo1.jpg" alt="Memory 1">
+                        <img src="assets/photo1.jpg" alt="Our Memory 1">
                     </div>
                     <div class="journal-lines">
-                        <p class="handwritten-caption">REPLACE: Your first sweet note here...</p>
+                        <p class="handwritten-caption">REPLACE: Type your first romantic memory or message here. It will automatically wrap nicely and fit perfectly on the page.</p>
                     </div>
                 </div>
                 <div class="journal-page photo-card top-right">
                     <div class="tape"></div>
                     <div class="photo-frame">
-                        <img src="assets/photo2.jpg" alt="Memory 2">
+                        <img src="assets/photo2.jpg" alt="Our Memory 2">
                     </div>
                     <div class="journal-lines">
-                        <p class="handwritten-caption">REPLACE: Your second sweet note here...</p>
+                        <p class="handwritten-caption">REPLACE: Type your second romantic memory here. Every word is a step closer to you.</p>
                     </div>
                 </div>
                 <div class="journal-page photo-card bottom-center">
                     <div class="tape"></div>
                     <div class="photo-frame">
-                        <img src="assets/photo3.jpg" alt="Memory 3">
+                        <img src="assets/photo3.jpg" alt="Our Memory 3">
                     </div>
                     <div class="journal-lines">
-                        <p class="handwritten-caption">REPLACE: Your third sweet note here...</p>
+                        <p class="handwritten-caption">REPLACE: Your third beautiful message goes right here on this tilted journal page.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="slide" data-index="2">
+        <section class="slide">
             <div class="journal-container multi-video">
                 <div class="journal-page video-card video-top">
                     <div class="tape"></div>
@@ -77,7 +79,7 @@
                         <video src="assets/video1.mp4" controls loop muted playsinline></video>
                     </div>
                     <div class="journal-lines">
-                        <p class="handwritten-caption">REPLACE: Note about this video...</p>
+                        <p class="handwritten-caption">REPLACE: Write something sweet about this clip...</p>
                     </div>
                 </div>
                 <div class="journal-page video-card video-bottom">
@@ -86,13 +88,13 @@
                         <video src="assets/video2.mp4" controls loop muted playsinline></video>
                     </div>
                     <div class="journal-lines">
-                        <p class="handwritten-caption">REPLACE: Note about that video...</p>
+                        <p class="handwritten-caption">REPLACE: Write something sweet about that clip...</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="slide" data-index="3">
+        <section class="slide">
             <div class="glass-card text-center cd-section">
                 <h2 class="section-title">A Recorded Message</h2>
                 <div class="cd-player-container">
@@ -100,20 +102,19 @@
                         <div class="cd-disc" id="cd-disc"></div>
                     </div>
                 </div>
-                <button id="play-record-btn" class="action-btn">Listen to Me</button>
-                <audio id="voice-message" src="assets/message.mp3"></audio>
+                <button id="play-record-btn" class="action-btn">Listen to My Voice</button>
             </div>
         </section>
 
-        <section class="slide" data-index="4">
-            <div class="glass-card text-center question-card">
+        <section class="slide">
+            <div class="glass-card text-center question-card" id="q-card-context">
                 <div class="small-avatar-frame">
                     <img src="assets/photo1.jpg" alt="Us">
                 </div>
                 <h2 class="question-title">Does she love me?</h2>
                 <div class="btn-group">
-                    <button id="yes-btn" class="choice-btn target-btn">Yes</button>
-                    <button id="no-btn" class="choice-btn escape-btn">No</button>
+                    <button id="yes-btn" class="choice-btn">Yes</button>
+                    <button id="no-btn" class="choice-btn">No</button>
                 </div>
             </div>
 
@@ -138,23 +139,24 @@
             </div>
         </section>
 
-        <section class="slide" data-index="5">
+        <section class="slide">
             <div class="glass-card written-letter">
                 <h3 class="letter-title">My Heart to Yours</h3>
                 <div class="letter-body">
-                    <p>REPLACE: Write your deep, meaningful, and incredibly romantic birthday message right here.</p>
-                    <p>Pour out your feelings completely. Tell her everything she means to you, spanning across your memories together.</p>
+                    <p>REPLACE: Write your deep, romantic, and touchy letter right here. Tell her how she lit up your entire world.</p>
+                    <p>Everything you ever wanted to say belongs in this beautifully glowing glass panel.</p>
                 </div>
                 <p class="letter-signature">Forever Yours</p>
-            </div> </section>
+            </div>
+        </section>
 
-        <section class="slide" data-index="6">
+        <section class="slide">
             <div class="glass-card text-center">
                 <h2 class="thank-you-title">Thank you for existing,<br>and for being mine.</h2>
             </div>
         </section>
 
-        <section class="slide" data-index="7">
+        <section class="slide">
             <div class="ending-container">
                 <div id="ending-pop-text" class="pop-text-animation">Happy Birthday</div>
                 <div id="ending-photo-wrapper" class="hidden-photo-frame">
