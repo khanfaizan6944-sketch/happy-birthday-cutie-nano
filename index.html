@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="ambient-hearts"></div>
+
+    <audio id="bg-music" src="assets/bg-music.mp3" loop></audio>
+
+    <div id="music-indicator" class="hidden">
+        <span class="music-bars"><span></span><span></span><span></span></span>
+        <span class="indicator-text">Playing our song...</span>
+    </div>
+
+    <div id="intro-overlay">
+        <div class="intro-content">
+            <div id="heart-trigger"></div>
+            <p class="tap-text">Tap the heart to enter a little universe</p>
+        </div>
+    </div>
+
+    <div id="main-slider">
+
+        <section class="slide active" data-index="0">
+            <div class="glass-card text-center">
+                <p class="sub-headline">This universe is dedicated to</p>
+                <h1 class="main-title">my love</h1>
+                <h2 class="birthday-text">Happy Birthday! 🎂</h2>
+            </div>
+        </section>
+
+        <section class="slide" data-index="1">
+            <div class="journal-container">
+                <div class="journal-page photo-card top-left">
+                    <div class="tape"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photo1.jpg" alt="Memory 1">
+                    </div>
+                    <div class="journal-lines">
+                        <p class="handwritten-caption">REPLACE: Your first sweet note here...</p>
+                    </div>
+                </div>
+                <div class="journal-page photo-card top-right">
+                    <div class="tape"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photo2.jpg" alt="Memory 2">
+                    </div>
+                    <div class="journal-lines">
+                        <p class="handwritten-caption">REPLACE: Your second sweet note here...</p>
+                    </div>
+                </div>
+                <div class="journal-page photo-card bottom-center">
+                    <div class="tape"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photo3.jpg" alt="Memory 3">
+                    </div>
+                    <div class="journal-lines">
+                        <p class="handwritten-caption">REPLACE: Your third sweet note here...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="2">
+            <div class="journal-container multi-video">
+                <div class="journal-page video-card video-top">
+                    <div class="tape"></div>
+                    <div class="video-frame">
+                        <video src="assets/video1.mp4" controls loop muted playsinline></video>
+                    </div>
+                    <div class="journal-lines">
+                        <p class="handwritten-caption">REPLACE: Note about this video...</p>
+                    </div>
+                </div>
+                <div class="journal-page video-card video-bottom">
+                    <div class="tape"></div>
+                    <div class="video-frame">
+                        <video src="assets/video2.mp4" controls loop muted playsinline></video>
+                    </div>
+                    <div class="journal-lines">
+                        <p class="handwritten-caption">REPLACE: Note about that video...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="3">
+            <div class="glass-card text-center cd-section">
+                <h2 class="section-title">A Recorded Message</h2>
+                <div class="cd-player-container">
+                    <div class="cd-case">
+                        <div class="cd-disc" id="cd-disc"></div>
+                    </div>
+                </div>
+                <button id="play-record-btn" class="action-btn">Listen to Me</button>
+                <audio id="voice-message" src="assets/message.mp3"></audio>
+            </div>
+        </section>
+
+        <section class="slide" data-index="4">
+            <div class="glass-card text-center question-card">
+                <div class="small-avatar-frame">
+                    <img src="assets/photo1.jpg" alt="Us">
+                </div>
+                <h2 class="question-title">Does she love me?</h2>
+                <div class="btn-group">
+                    <button id="yes-btn" class="choice-btn target-btn">Yes</button>
+                    <button id="no-btn" class="choice-btn escape-btn">No</button>
+                </div>
+            </div>
+
+            <div id="yes-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="heart-mask">
+                        <img src="assets/reveal.jpg" alt="Our Special Reveal">
+                    </div>
+                    <div class="bouquet-graphic">💐</div>
+                    <p class="celebration-text">I knew it! ❤️</p>
+                    <button id="close-modal-btn" class="action-btn">Close</button>
+                </div>
+                <div id="modal-kisses-container"></div>
+            </div>
+
+            <div id="no-modal" class="modal hidden">
+                <div class="modal-content text-center">
+                    <div class="broken-heart-emoji">💔</div>
+                    <p class="heartbreak-text">Ouch... my heart...</p>
+                    <button id="close-no-btn" class="action-btn">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="5">
+            <div class="glass-card written-letter">
+                <h3 class="letter-title">My Heart to Yours</h3>
+                <div class="letter-body">
+                    <p>REPLACE: Write your deep, meaningful, and incredibly romantic birthday message right here.</p>
+                    <p>Pour out your feelings completely. Tell her everything she means to you, spanning across your memories together.</p>
+                </div>
+                <p class="letter-signature">Forever Yours</p>
+            </section>
+
+        <section class="slide" data-index="6">
+            <div class="glass-card text-center">
+                <h2 class="thank-you-title">Thank you for existing,<br>and for being mine.</h2>
+            </div>
+        </section>
+
+        <section class="slide" data-index="7">
+            <div class="ending-container">
+                <div id="ending-pop-text" class="pop-text-animation">Happy Birthday</div>
+                <div id="ending-photo-wrapper" class="hidden-photo-frame">
+                    <div class="spinning-linings"></div>
+                    <img id="ending-final-img" src="assets/photo2.jpg" alt="Final Portrait">
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="pager-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
