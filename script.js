@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // UI Layout State Trackers
     let currentSlide = 0;
     const totalSlides = 8;
     let isTransitioning = false;
     
-    // Target Component Node Extractions
     const mainSlider = document.getElementById("main-slider");
     const slides = document.querySelectorAll(".slide");
     const dots = document.querySelectorAll("#pager-dots .dot");
@@ -33,50 +31,39 @@ document.addEventListener("DOMContentLoaded", () => {
     let noClickCount = 0;
     let miniKissesInterval = null;
 
-    // --- 1. INTRO ENGINE LOGIC ---
     heartTrigger.addEventListener("click", () => {
         heartTrigger.classList.add("burst-out-effect");
         
-        // Unmute and safely initiate background canvas orchestration
         bgMusic.play().then(() => {
             musicIndicator.classList.remove("hidden");
-        }).catch(err => console.log("Audio waiting for explicit interact flag."));
+        }).catch(err => console.log("Audio activation awaiting frame click."));
         
         setTimeout(() => {
             introOverlay.style.opacity = "0";
             setTimeout(() => {
                 introOverlay.style.display = "none";
                 startAmbientHearts();
-                toggleSlideElements(0); // Wake first active slide processing
+                toggleSlideElements(0);
             }, 800);
         }, 500);
     });
 
-    // --- 2. STEP-BY-STEP LOCK-PAGER NAVIGATION ---
     function navigateToSlide(targetIndex) {
         if (targetIndex < 0 || targetIndex >= totalSlides || isTransitioning) return;
         
         isTransitioning = true;
         currentSlide = targetIndex;
         
-        // Execute structural CSS transformation shifts
         mainSlider.style.transform = `translateY(-${currentSlide * 100}vh)`;
         
-        // Sync active slide states
         slides.forEach((slide, i) => {
-            if (i === currentSlide) {
-                slide.classList.add("active");
-            } else {
-                slide.classList.remove("active");
-            }
+            slide.classList.toggle("active", i === currentSlide);
         });
         
-        // Sync layout pager dots indicators
         dots.forEach((dot, i) => {
             dot.classList.toggle("active", i === currentSlide);
         });
 
-        // Trigger individual custom runtime events matching layout indices
         toggleSlideElements(currentSlide);
 
         setTimeout(() => {
@@ -84,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 700);
     }
 
-    // Capture Native Browser Wheel Scrolling Inputs
     window.addEventListener("wheel", (e) => {
         if (introOverlay.style.display !== "none") return;
         if (e.deltaY > 0) {
@@ -94,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, { passive: true });
 
-    // Mobile Swipe (Touch) Mechanics Processing Engines
     let touchStartY = 0;
     window.addEventListener("touchstart", (e) => {
         touchStartY = e.touches[0].clientY;
@@ -105,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let touchEndY = e.changedTouches[0].clientY;
         let deltaY = touchStartY - touchEndY;
         
-        if (Math.abs(deltaY) > 45) { // Verify swipe intent distance limits
+        if (Math.abs(deltaY) > 45) {
             if (deltaY > 0) {
                 navigateToSlide(currentSlide + 1);
             } else {
@@ -114,56 +99,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, { passive: true });
 
-    // --- 3. DYNAMIC PER-SLIDE RUNTIME ENGINE ---
     function toggleSlideElements(index) {
-        // Stop any playing video files running on other slides natively
         document.querySelectorAll("video").forEach(v => v.pause());
 
-        // Slide 3 Handle (Autoplay management safely restricted to active view)
         if (index === 2) {
             const activeVideos = slides[2].querySelectorAll("video");
             activeVideos.forEach(v => { v.currentTime = 0; v.play().catch(()=> {}); });
         }
 
-        // Slide 4 Handle: Voice Recording Page Audio Ducking Engine Flow
-        if (index === 3) {
-            // Retain placeholder structure. System auto handled natively or tracking end flags.
-        } else {
-            // If user left voice slide safely recover original background state parameters
+        if (index !== 3) {
             if (!voiceMessage.paused) {
                 voiceMessage.pause();
                 voiceMessage.currentTime = 0;
                 cdDisc.classList.remove("spinning");
                 playRecordBtn.textContent = "Listen to Me";
-                
-                // Ramp background volume levels back up smoothly
                 bgMusic.volume = 1.0;
                 musicIndicator.classList.remove("hidden");
             }
         }
 
-        // Slide 8 Handle: Pop-out Reveal Sequencing Logic
         if (index === 7) {
             endingText.classList.add("pop-out-active");
             endingPhoto.classList.remove("visible");
-            
             setTimeout(() => {
                 endingPhoto.classList.add("visible");
-            }, 1800); // Triggers exactly when text scale-burst achieves maximum blur/opacity drop
+            }, 1800);
         } else {
-            // Soft reset to allow animation replay cycles clean execution loops
             endingText.classList.remove("pop-out-active");
             endingPhoto.classList.remove("visible");
         }
     }
 
-    // --- 4. CD PLAYER AUDIO CONTROLS ENGINE ---
     playRecordBtn.addEventListener("click", () => {
         if (voiceMessage.paused) {
-            // Duck background music
             bgMusic.volume = 0.05;
             musicIndicator.classList.add("hidden");
-            
             voiceMessage.play();
             cdDisc.classList.add("spinning");
             playRecordBtn.textContent = "Pause Message";
@@ -171,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
             voiceMessage.pause();
             cdDisc.classList.remove("spinning");
             playRecordBtn.textContent = "Listen to Me";
-            
             bgMusic.volume = 1.0;
             musicIndicator.classList.remove("hidden");
         }
@@ -184,16 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
         musicIndicator.classList.remove("hidden");
     });
 
-    // --- 5. INTERACTIVE YES/NO QUESTION MACHINE ---
-    
-    // "No" Escape Positioning Mechanics Vector Calculations
     function fleeCursor() {
-        // Query bounding limitations based on actual physical container allocations
         const card = document.querySelector(".question-card");
         const cardWidth = card.clientWidth;
         const cardHeight = card.clientHeight;
-        
-        // Restrict bounds strictly within padding elements of visual card layers
         const maxX = cardWidth - noBtn.clientWidth - 30;
         const maxY = cardHeight - noBtn.clientHeight - 30;
         
@@ -210,24 +173,20 @@ document.addEventListener("DOMContentLoaded", () => {
         noClickCount++;
         if (noClickCount >= 3) {
             noModal.classList.remove("hidden");
-            noClickCount = 0; // Clear condition tracker
+            noClickCount = 0;
         }
     });
 
     closeNoBtn.addEventListener("click", () => {
         noModal.classList.add("hidden");
-        // Reset No button back to standard location bounds
         noBtn.style.position = "absolute";
         noBtn.style.left = "170px";
         noBtn.style.top = "auto";
     });
 
-    // "Yes" Celebration Activation Engine Sequences
     yesBtn.addEventListener("click", () => {
         yesModal.classList.remove("hidden");
         triggerGiantKissPop();
-        
-        // Spawn constant stream of small drifting kisses across modal landscape bounds
         miniKissesInterval = setInterval(spawnMiniKiss, 150);
     });
 
@@ -252,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
         kiss.style.left = `${Math.random() * 100}%`;
         kiss.style.bottom = "-5%";
         
-        // Randomized horizontal vectors
         const driftX = (Math.random() - 0.5) * 150;
         const duration = 2000 + Math.random() * 1500;
         
@@ -266,11 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
         animation.onfinish = () => kiss.remove();
     }
 
-    // --- 6. GLOBAL ERRATIC AMBIENT HEARTS ENGINE ---
     function startAmbientHearts() {
         const heartPool = document.getElementById("ambient-hearts");
-        const spawnCount = 18; // Clean background concurrency processing limits
-
+        const spawnCount = 18;
         for (let i = 0; i < spawnCount; i++) {
             createPersistentHeart(heartPool);
         }
@@ -278,14 +234,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createPersistentHeart(container) {
         const heart = document.createElement("div");
-        
-        // Dynamic slide condition contextual variables configuration setup
         let currentPoolMix = ["❤️", "✨", "🌸", "💖"];
-        
         heart.className = "ambient-heart-node beating";
         heart.innerHTML = currentPoolMix[Math.floor(Math.random() * currentPoolMix.length)];
-        
-        // Spread starting positions randomly across physical viewport layout matrices
         heart.style.left = `${Math.random() * 100}vw`;
         heart.style.top = `${Math.random() * 100}vh`;
         heart.style.transform = `scale(${0.6 + Math.random() * 0.6})`;
@@ -296,8 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function animateErraticHeart(element) {
         const speed = 6000 + Math.random() * 8000;
-        
-        // Calculate multi-directional vector points randomly
         const targetX = Math.random() * window.innerWidth;
         const targetY = Math.random() * window.innerHeight;
         
@@ -307,17 +256,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ], { duration: speed, easing: 'ease-in-out' });
         
         animation.onfinish = () => {
-            // Update historical markers prior to recycling thread instance operations
             element.style.top = `${targetY}px`;
             element.style.left = `${targetX}px`;
-            
-            // Adjust assets elements dynamically when running on final Slide contexts
             if (currentSlide === 5) {
                 element.innerHTML = Math.random() > 0.5 ? "🌹" : "💋";
             } else {
                 element.innerHTML = Math.random() > 0.5 ? "💖" : "✨";
             }
-            
             animateErraticHeart(element);
         };
     }
